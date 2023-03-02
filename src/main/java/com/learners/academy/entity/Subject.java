@@ -1,29 +1,26 @@
 package com.learners.academy.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
 public class Subject {
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy= GenerationType.IDENTITY)
   private Long id;
   private String name;
   private String level;
-  @OneToMany
-  private List<Class> classes;
+  @OneToMany(mappedBy = "subject")
+  private List<Clazz> clazzes;
 
   public Subject() {
 
   }
 
-  public Subject(String name, String level, List<Class> classes) {
+  public Subject(String name, String level, List<Clazz> clazzes) {
     this.name = name;
     this.level = level;
-    this.classes = classes;
+    this.clazzes = clazzes;
   }
 
   public void setId(Long id) {
@@ -50,12 +47,12 @@ public class Subject {
     this.level = level;
   }
 
-  public List<Class> getClasses() {
-    return classes;
+  public List<Clazz> getClazzes() {
+    return clazzes;
   }
 
-  public void setClasses(List<Class> classes) {
-    this.classes = classes;
+  public void setClazzes(List<Clazz> clazzes) {
+    this.clazzes = clazzes;
   }
 
   @Override
@@ -64,7 +61,7 @@ public class Subject {
             "id=" + id +
             ", name='" + name + '\'' +
             ", level='" + level + '\'' +
-            ", classes=" + classes +
+            ", clazzes=" + clazzes +
             '}';
   }
 }

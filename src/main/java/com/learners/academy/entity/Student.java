@@ -1,27 +1,29 @@
 package com.learners.academy.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Student {
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String name;
-  private String surname;
+  private String lastName;
   private String email;
   private String phone;
+  @ManyToOne
+  @JoinColumn(name = "clazzId", nullable = true)
+  private Clazz clazz;
 
   public Student() {
   }
 
-  public Student(String name, String surname, String email, String phone) {
+  public Student(String name, String lastName, String email, String phone, Clazz clazz) {
     this.name = name;
-    this.surname = surname;
+    this.lastName = lastName;
     this.email = email;
     this.phone = phone;
+    this.clazz = clazz;
   }
 
   public void setId(Long id) {
@@ -40,12 +42,12 @@ public class Student {
     this.name = name;
   }
 
-  public String getSurname() {
-    return surname;
+  public String getLastName() {
+    return lastName;
   }
 
-  public void setSurname(String surname) {
-    this.surname = surname;
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
   }
 
   public String getEmail() {
@@ -64,14 +66,23 @@ public class Student {
     this.phone = phone;
   }
 
+  public Clazz getClazz() {
+    return clazz;
+  }
+
+  public void setClazz(Clazz clazz) {
+    this.clazz = clazz;
+  }
+
   @Override
   public String toString() {
     return "Student{" +
-            "id=" + id +
-            ", name='" + name + '\'' +
-            ", surname='" + surname + '\'' +
-            ", email='" + email + '\'' +
-            ", phone='" + phone + '\'' +
-            '}';
+        "id=" + id +
+        ", name='" + name + '\'' +
+        ", lastName='" + lastName + '\'' +
+        ", email='" + email + '\'' +
+        ", phone='" + phone + '\'' +
+        ", clazz=" + clazz +
+        '}';
   }
 }

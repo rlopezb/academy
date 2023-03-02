@@ -1,5 +1,6 @@
 package com.learners.academy.dao;
 
+import com.learners.academy.entity.Student;
 import com.learners.academy.entity.Subject;
 import com.learners.academy.resource.Database;
 import org.hibernate.Session;
@@ -23,8 +24,9 @@ public class SubjectDao {
     return subject;
   }
 
-  public Boolean delete(Subject subject) {
+  public Boolean delete(Long id) {
     Session session = Database.openSession(true);
+    Subject subject = session.find(Subject.class, id);
     session.delete(subject);
     Database.closeSession(session);
     return true;
@@ -33,9 +35,9 @@ public class SubjectDao {
   public List<Subject> findAll() {
     Session session = Database.openSession(false);
     TypedQuery typedQuery = session.createQuery("from Subject");
-    List<Subject> classes = typedQuery.getResultList();
+    List<Subject> clazzes = typedQuery.getResultList();
     Database.closeSession(session);
-    return classes;
+    return clazzes;
   }
 
   public Subject findById(Long id) {

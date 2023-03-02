@@ -23,8 +23,9 @@ public class TeacherDao {
     return teacher;
   }
 
-  public Boolean delete(Teacher teacher) {
+  public Boolean delete(Long id) {
     Session session = Database.openSession(true);
+    Teacher teacher = session.find(Teacher.class, id);
     session.delete(teacher);
     Database.closeSession(session);
     return true;
@@ -33,9 +34,9 @@ public class TeacherDao {
   public List<Teacher> findAll() {
     Session session = Database.openSession(false);
     TypedQuery typedQuery = session.createQuery("from Teacher");
-    List<Teacher> classes = typedQuery.getResultList();
+    List<Teacher> clazzes = typedQuery.getResultList();
     Database.closeSession(session);
-    return classes;
+    return clazzes;
   }
 
   public Teacher findById(Long id) {

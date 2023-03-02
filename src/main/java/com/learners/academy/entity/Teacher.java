@@ -1,34 +1,30 @@
 package com.learners.academy.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
 public class Teacher {
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy= GenerationType.IDENTITY)
   private Long id;
   private String name;
-  private String surname;
+  private String lastName;
   private String email;
   private String phone;
-  @OneToMany
-  private List<Class> classes;
+  @OneToMany(mappedBy = "teacher")
+  private List<Clazz> clazzes;
 
   public Teacher() {
 
   }
 
-  public Teacher(String name, String surname, String email, String phone, List<Class> classes) {
-    this.id = id;
+  public Teacher(String name, String lastName, String email, String phone, List<Clazz> clazzes) {
     this.name = name;
-    this.surname = surname;
+    this.lastName = lastName;
     this.email = email;
     this.phone = phone;
-    this.classes = classes;
+    this.clazzes = clazzes;
   }
 
 
@@ -48,12 +44,12 @@ public class Teacher {
     this.name = name;
   }
 
-  public String getSurname() {
-    return surname;
+  public String getLastName() {
+    return lastName;
   }
 
-  public void setSurname(String surname) {
-    this.surname = surname;
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
   }
 
   public String getEmail() {
@@ -72,12 +68,12 @@ public class Teacher {
     this.phone = phone;
   }
 
-  public List<Class> getClasses() {
-    return classes;
+  public List<Clazz> getClazzes() {
+    return clazzes;
   }
 
-  public void setClasses(List<Class> classes) {
-    this.classes = classes;
+  public void setClazzes(List<Clazz> clazzes) {
+    this.clazzes = clazzes;
   }
 
   @Override
@@ -85,10 +81,10 @@ public class Teacher {
     return "Teacher{" +
             "id=" + id +
             ", name='" + name + '\'' +
-            ", surname='" + surname + '\'' +
+            ", lastName='" + lastName + '\'' +
             ", email='" + email + '\'' +
             ", phone='" + phone + '\'' +
-            ", classes=" + classes +
+            ", clazzes=" + clazzes +
             '}';
   }
 }

@@ -16,8 +16,8 @@ public class StudentService {
     return studentDao.update(student);
   }
 
-  public Boolean delete(Student student) {
-    return studentDao.delete(student);
+  public Boolean delete(Long id) {
+    return studentDao.delete(id);
 
   }
 

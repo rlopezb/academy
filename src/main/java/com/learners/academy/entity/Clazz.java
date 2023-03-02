@@ -1,31 +1,36 @@
 package com.learners.academy.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Class {
+public class Clazz {
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private Integer number;
   private Integer room;
   private Date date;
-  @OneToMany
+  @OneToMany(mappedBy = "clazz")
   private List<Student> students;
+  @ManyToOne
+  @JoinColumn(name = "subjectId", nullable = true)
+  private Subject subject;
+  @ManyToOne
+  @JoinColumn(name = "teacherId", nullable = true)
+  private Teacher teacher;
 
-  public Class() {
+  public Clazz() {
 
   }
-  public Class(Integer number, Integer room, Date date, List<Student> students) {
+
+  public Clazz(Integer number, Integer room, Date date, List<Student> students, Subject subject) {
     this.number = number;
     this.room = room;
     this.date = date;
     this.students = students;
+    this.subject = subject;
   }
 
 
@@ -69,14 +74,11 @@ public class Class {
     this.students = students;
   }
 
-  @Override
-  public String toString() {
-    return "Class{" +
-            "id=" + id +
-            ", number=" + number +
-            ", room=" + room +
-            ", date=" + date +
-            ", students=" + students +
-            '}';
+  public Subject getSubject() {
+    return subject;
+  }
+
+  public void setSubject(Subject subject) {
+    this.subject = subject;
   }
 }

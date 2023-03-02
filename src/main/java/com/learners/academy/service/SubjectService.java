@@ -16,8 +16,8 @@ public class SubjectService {
     return subjectDao.update(subject);
   }
 
-  public Boolean delete(Subject subject) {
-    return subjectDao.delete(subject);
+  public Boolean delete(Long id) {
+    return subjectDao.delete(id);
 
   }
 

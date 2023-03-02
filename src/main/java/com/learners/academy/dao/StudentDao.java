@@ -23,8 +23,9 @@ public class StudentDao {
     return student;
   }
 
-  public Boolean delete(Student student) {
+  public Boolean delete(Long id) {
     Session session = Database.openSession(true);
+    Student student = session.find(Student.class,id);
     session.delete(student);
     Database.closeSession(session);
     return true;
@@ -33,9 +34,9 @@ public class StudentDao {
   public List<Student> findAll() {
     Session session = Database.openSession(false);
     TypedQuery typedQuery = session.createQuery("from Student");
-    List<Student> classes = typedQuery.getResultList();
+    List<Student> clazzes = typedQuery.getResultList();
     Database.closeSession(session);
-    return classes;
+    return clazzes;
   }
 
   public Student findById(Long id) {
