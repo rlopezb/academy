@@ -24,10 +24,17 @@ public class StudentController extends HttpServlet {
         StudentService studentService = new StudentService();
         Student student = studentService.findById(id);
         request.setAttribute("student", student);
-        request.setAttribute("message", "Student wit id " + id + " found");
+        if(student==null){
+          request.setAttribute("status", "info");
+          request.setAttribute("message", "Student with id " + id + " not found");
+        }else{
+          request.setAttribute("status", "ok");
+          request.setAttribute("message", "Student with id " + id + " found");
+        }
         requestDispatcher = request.getRequestDispatcher("viewStudent.jsp");
       } catch (Exception ex) {
-        request.setAttribute("error", "Cannot find student by id " + id + ": " + ex);
+        request.setAttribute("status", "error");
+        request.setAttribute("message", "Cannot find student by id " + id + ": " + ex);
         requestDispatcher = request.getRequestDispatcher("error.jsp");
       }
     } else {
@@ -35,9 +42,11 @@ public class StudentController extends HttpServlet {
         StudentService studentService = new StudentService();
         List<Student> students = studentService.findAll();
         request.setAttribute("students", students);
+        request.setAttribute("status", "ok");
         request.setAttribute("message", "List of " + students.size() + " students retrieved");
         requestDispatcher = request.getRequestDispatcher("viewStudentList.jsp");
       } catch (Exception ex) {
+        request.setAttribute("status", "error");
         request.setAttribute("error", "Cannot list all students: " + ex);
         requestDispatcher = request.getRequestDispatcher("error.jsp");
       }
@@ -63,10 +72,12 @@ public class StudentController extends HttpServlet {
       StudentService studentService = new StudentService();
       student = studentService.add(student);
       request.setAttribute("student", student);
+      request.setAttribute("status", "ok");
       request.setAttribute("message", "New student added with id " + student.getId());
       requestDispatcher = request.getRequestDispatcher("viewStudent.jsp");
     } catch (Exception ex) {
-      request.setAttribute("error", "Cannot add student: " + ex);
+      request.setAttribute("status", "error");
+      request.setAttribute("message", "Cannot add student: " + ex);
       requestDispatcher = request.getRequestDispatcher("error.jsp");
     }
     response.setContentType("text/html");
@@ -92,10 +103,12 @@ public class StudentController extends HttpServlet {
       StudentService studentService = new StudentService();
       student = studentService.update(student);
       request.setAttribute("student", student);
+      request.setAttribute("status", "ok");
       request.setAttribute("message", "Student with id " + student.getId() + " updated");
       requestDispatcher = request.getRequestDispatcher("viewStudent.jsp");
     } catch (Exception ex) {
-      request.setAttribute("error", "Cannot find student by id " + id + ": " + ex);
+      request.setAttribute("status", "error");
+      request.setAttribute("message", "Cannot find student by id " + id + ": " + ex);
       requestDispatcher = request.getRequestDispatcher("error.jsp");
     }
     response.setContentType("text/html");
@@ -110,11 +123,13 @@ public class StudentController extends HttpServlet {
     try {
       StudentService studentService = new StudentService();
       studentService.delete(id);
+      request.setAttribute("status", "ok");
       request.setAttribute("message", "Student with id " + id + " deleted");
       request.setAttribute("student", null);
       requestDispatcher = request.getRequestDispatcher("viewStudent.jsp");
     } catch (Exception ex) {
-      request.setAttribute("error", "Cannot delete student with id " + id + ": " + ex);
+      request.setAttribute("status", "error");
+      request.setAttribute("message", "Cannot delete student with id " + id + ": " + ex);
       requestDispatcher = request.getRequestDispatcher("error.jsp");
     }
     response.setContentType("text/html");
