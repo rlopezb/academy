@@ -18,6 +18,11 @@
 </h3>
 <strong>Level: </strong><span><%=clazz.getLevel()%></span><br/>
 <strong>Line: </strong><span><%=clazz.getLine()%></span>
+<form action="ClazzController" method="post">
+    <input type="hidden" name="id" value="<%=clazz.getId()%>" />
+    <input type="hidden" name="action" value="delete"/>
+    <input type="submit" value="Delete" />
+</form>
 <%
 } else {
 %>
@@ -26,5 +31,6 @@
 <%
 }
 %>
+Go to <a href="home.jsp">Home</a> page<br/>
 </body>
 </html>

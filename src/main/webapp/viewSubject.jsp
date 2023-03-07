@@ -17,7 +17,12 @@
 <h3>Subject with id <%=subject.getId()%>
 </h3>
 <strong>Name: </strong><span><%=subject.getName()%></span><br/>
-<strong>Level: </strong><span><%=subject.getLevel()%></span>
+<strong>Level: </strong><span><%=subject.getLevel()%></span><br/>
+<form action="SubjectController" method="post">
+    <input type="hidden" name="id" value="<%=subject.getId()%>" />
+    <input type="hidden" name="action" value="delete"/>
+    <input type="submit" value="Delete" />
+</form>
 <%
 } else {
 %>
@@ -26,5 +31,7 @@
 <%
     }
 %>
+Go to <a href="home.jsp">Home</a> page<br/>
+
 </body>
 </html>

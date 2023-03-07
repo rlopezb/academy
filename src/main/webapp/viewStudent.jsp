@@ -21,6 +21,11 @@
 <strong>eMail: </strong><span><%=student.getEmail()%></span><br/>
 <strong>Phone: </strong><span><%=student.getPhone()%></span><br/>
 <strong>Class: </strong><span><%=student.getClazz() != null ? student.getClazz().getLevel() + student.getClazz().getLine()  : "(not assigned)"%></span>
+<form action="StudentController" method="post">
+    <input type="hidden" name="id" value="<%=student.getId()%>" />
+    <input type="hidden" name="action" value="delete"/>
+    <input type="submit" value="Delete" />
+</form>
 <%
     } else {
 %>
@@ -29,5 +34,6 @@
 <%
     }
 %>
+Go to <a href="home.jsp">Home</a> page<br/>
 </body>
 </html>

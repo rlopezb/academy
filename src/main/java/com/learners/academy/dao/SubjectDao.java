@@ -1,6 +1,5 @@
 package com.learners.academy.dao;
 
-import com.learners.academy.entity.Student;
 import com.learners.academy.entity.Subject;
 import com.learners.academy.resource.Database;
 import org.hibernate.Session;

@@ -57,12 +57,31 @@ public class ClazzController extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    //Add new student
+    String action = request.getParameter("action");
+    switch (action) {
+      case "delete":
+        delete(request, response);
+        break;
+      case "add":
+        add(request, response);
+        break;
+      case "modify":
+        modify(request, response);
+        break;
+    }
+  }
+
+
+  private void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     //Add new clazz
     RequestDispatcher requestDispatcher;
     try {
       String line = request.getParameter("line");
+      String level = request.getParameter("level");
       Clazz clazz = new Clazz();
       clazz.setLine(line);
+      clazz.setLevel(level);
 
       ClazzService clazzService = new ClazzService();
       clazz = clazzService.add(clazz);
@@ -79,16 +98,18 @@ public class ClazzController extends HttpServlet {
     requestDispatcher.include(request, response);
   }
 
-  @Override
-  protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+  private void modify(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     //Modify clazz
     RequestDispatcher requestDispatcher;
     try {
       Long id = Long.valueOf(request.getParameter("id"));
       String line = request.getParameter("line");
+      String level = request.getParameter("level");
       Clazz clazz = new Clazz();
       clazz.setId(id);
       clazz.setLine(line);
+      clazz.setLevel(level);
 
       ClazzService clazzService = new ClazzService();
       clazz = clazzService.update(clazz);
@@ -105,8 +126,7 @@ public class ClazzController extends HttpServlet {
     requestDispatcher.include(request, response);
   }
 
-  @Override
-  protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+  private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     //Delete clazz
     RequestDispatcher requestDispatcher;
     try {

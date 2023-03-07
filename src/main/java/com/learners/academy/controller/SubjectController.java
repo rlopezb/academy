@@ -57,6 +57,22 @@ public class SubjectController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //Add new student
+        String action = request.getParameter("action");
+        switch (action) {
+            case "delete":
+                delete(request, response);
+                break;
+            case "add":
+                add(request, response);
+                break;
+            case "modify":
+                modify(request, response);
+                break;
+        }
+    }
+
+    private void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //Add new subject
         String name = request.getParameter("name");
         String level = request.getParameter("level");
@@ -80,8 +96,7 @@ public class SubjectController extends HttpServlet {
         requestDispatcher.include(request, response);
     }
 
-    @Override
-    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void modify(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //Modify subject
         Long id = Long.valueOf(request.getParameter("id"));
         String name = request.getParameter("name");
@@ -107,8 +122,7 @@ public class SubjectController extends HttpServlet {
         requestDispatcher.include(request, response);
     }
 
-    @Override
-    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //Delete subject
         Long id = Long.valueOf(request.getParameter("id"));
         RequestDispatcher requestDispatcher;

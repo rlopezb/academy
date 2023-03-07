@@ -22,12 +22,20 @@
         <strong>Lastname: </strong><span><%=student.getLastName()%></span><br/>
         <strong>eMail: </strong><span><%=student.getEmail()%></span><br/>
         <strong>Phone: </strong><span><%=student.getPhone()%></span><br/>
-        <strong>Class: </strong><span><%=student.getClazz() != null ? student.getClazz().getLevel() + student.getClazz().getLine()  : "(not assigned)"%></span>
+        <strong>Class: </strong><span><%=student.getClazz() != null ? student.getClazz().getLevel() + student.getClazz().getLine()  : "(not assigned)"%></span><br/>
+        <form action="StudentController" method="get">
+            <input type="hidden" name="id" value="<%=student.getId()%>" />
+            <input type="submit" value="View" />
+        </form>
     </li>
     <%
         }
     %>
 </ul>
+<form action="addStudent.jsp">
+    <input type="submit" value="Add" />
+</form>
+Go to <a href="home.jsp">Home</a> page<br/>
 </body>
 
 </html>

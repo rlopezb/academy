@@ -20,7 +20,12 @@
 <strong>Name: </strong><span><%=teacher.getName()%></span><br/>
 <strong>Lastname: </strong><span><%=teacher.getLastName()%></span><br/>
 <strong>eMail: </strong><span><%=teacher.getEmail()%></span><br/>
-<strong>Phone: </strong><span><%=teacher.getPhone()%></span>
+<strong>Phone: </strong><span><%=teacher.getPhone()%></span><br/>
+<form action="TeacherController" method="post">
+    <input type="hidden" name="id" value="<%=teacher.getId()%>" />
+    <input type="hidden" name="action" value="delete"/>
+    <input type="submit" value="Delete" />
+</form>
 <%
     } else {
 %>
@@ -29,5 +34,6 @@
 <%
     }
 %>
+Go to <a href="home.jsp">Home</a> page<br/>
 </body>
 </html>

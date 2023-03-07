@@ -22,11 +22,19 @@
         <strong>Lastname: </strong><span><%=teacher.getLastName()%></span><br/>
         <strong>eMail: </strong><span><%=teacher.getEmail()%></span><br/>
         <strong>Phone: </strong><span><%=teacher.getPhone()%></span>
+        <form action="TeacherController" method="get">
+            <input type="hidden" name="id" value="<%=teacher.getId()%>" />
+            <input type="submit" value="View" />
+        </form>
     </li>
     <%
         }
     %>
 </ul>
+<form action="addTeacher.jsp">
+    <input type="submit" value="Add" />
+</form>
+Go to <a href="home.jsp">Home</a> page<br/>
 </body>
 
 </html>

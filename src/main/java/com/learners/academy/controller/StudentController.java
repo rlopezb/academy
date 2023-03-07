@@ -58,6 +58,21 @@ public class StudentController extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     //Add new student
+    String action = request.getParameter("action");
+    switch (action) {
+      case "delete":
+        delete(request, response);
+        break;
+      case "add":
+        add(request, response);
+        break;
+      case "modify":
+        modify(request, response);
+        break;
+    }
+  }
+
+  private void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     RequestDispatcher requestDispatcher;
     try {
       String name = request.getParameter("name");
@@ -85,22 +100,21 @@ public class StudentController extends HttpServlet {
     requestDispatcher.include(request, response);
   }
 
-  @Override
-  protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+  private void modify(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     //Modify student
     RequestDispatcher requestDispatcher;
     try {
       Long id = Long.valueOf(request.getParameter("id"));
-    String name = request.getParameter("name");
-    String lastName = request.getParameter("lastName");
-    String email = request.getParameter("email");
-    String phone = request.getParameter("phone");
-    Student student = new Student();
-    student.setId(id);
-    student.setName(name);
-    student.setLastName(lastName);
-    student.setEmail(email);
-    student.setPhone(phone);
+      String name = request.getParameter("name");
+      String lastName = request.getParameter("lastName");
+      String email = request.getParameter("email");
+      String phone = request.getParameter("phone");
+      Student student = new Student();
+      student.setId(id);
+      student.setName(name);
+      student.setLastName(lastName);
+      student.setEmail(email);
+      student.setPhone(phone);
 
       StudentService studentService = new StudentService();
       student = studentService.update(student);
@@ -117,8 +131,7 @@ public class StudentController extends HttpServlet {
     requestDispatcher.include(request, response);
   }
 
-  @Override
-  protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+  protected void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     //Delete student
     RequestDispatcher requestDispatcher;
     try {

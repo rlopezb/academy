@@ -20,11 +20,19 @@
         <h3>Clazz with id <%=clazz.getId()%></h3>
         <strong>Level: </strong><span><%=clazz.getLevel()%></span><br/>
         <strong>Line: </strong><span><%=clazz.getLine()%></span>
+        <form action="ClazzController" method="get">
+            <input type="hidden" name="id" value="<%=clazz.getId()%>" />
+            <input type="submit" value="View" />
+        </form>
     </li>
     <%
         }
     %>
 </ul>
+<form action="addClazz.jsp">
+    <input type="submit" value="Add" />
+</form>
+Go to <a href="home.jsp">Home</a> page<br/>
 </body>
 
 </html>

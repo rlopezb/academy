@@ -57,6 +57,22 @@ public class UserController extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    //Add new student
+    String action = request.getParameter("action");
+    switch (action) {
+      case "delete":
+        delete(request, response);
+        break;
+      case "add":
+        add(request, response);
+        break;
+      case "modify":
+        modify(request, response);
+        break;
+    }
+  }
+
+  private void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     //Add new user
     RequestDispatcher requestDispatcher;
     try {
@@ -89,8 +105,8 @@ public class UserController extends HttpServlet {
     requestDispatcher.include(request, response);
   }
 
-  @Override
-  protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+  private void modify(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     //Modify user
     RequestDispatcher requestDispatcher;
     try {
@@ -125,8 +141,8 @@ public class UserController extends HttpServlet {
     requestDispatcher.include(request, response);
   }
 
-  @Override
-  protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+  private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     //Delete user
     RequestDispatcher requestDispatcher;
     try {
