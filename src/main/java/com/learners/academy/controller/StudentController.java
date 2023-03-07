@@ -19,22 +19,22 @@ public class StudentController extends HttpServlet {
     //Get student(s)
     RequestDispatcher requestDispatcher;
     if (request.getParameter("id") != null) {
-      Long id = Long.valueOf(request.getParameter("id"));
       try {
+        Long id = Long.valueOf(request.getParameter("id"));
         StudentService studentService = new StudentService();
         Student student = studentService.findById(id);
         request.setAttribute("student", student);
-        if(student==null){
+        if (student == null) {
           request.setAttribute("status", "info");
           request.setAttribute("message", "Student with id " + id + " not found");
-        }else{
+        } else {
           request.setAttribute("status", "ok");
           request.setAttribute("message", "Student with id " + id + " found");
         }
         requestDispatcher = request.getRequestDispatcher("viewStudent.jsp");
       } catch (Exception ex) {
         request.setAttribute("status", "error");
-        request.setAttribute("message", "Cannot find student by id " + id + ": " + ex);
+        request.setAttribute("message", "Cannot find student: " + ex);
         requestDispatcher = request.getRequestDispatcher("error.jsp");
       }
     } else {
@@ -44,7 +44,7 @@ public class StudentController extends HttpServlet {
         request.setAttribute("students", students);
         request.setAttribute("status", "ok");
         request.setAttribute("message", "List of " + students.size() + " students retrieved");
-        requestDispatcher = request.getRequestDispatcher("viewStudentList.jsp");
+        requestDispatcher = request.getRequestDispatcher("viewStudents.jsp");
       } catch (Exception ex) {
         request.setAttribute("status", "error");
         request.setAttribute("error", "Cannot list all students: " + ex);
@@ -58,17 +58,18 @@ public class StudentController extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     //Add new student
-    String name = request.getParameter("name");
-    String lastName = request.getParameter("lastName");
-    String email = request.getParameter("email");
-    String phone = request.getParameter("phone");
-    Student student = new Student();
-    student.setName(name);
-    student.setLastName(lastName);
-    student.setEmail(email);
-    student.setPhone(phone);
     RequestDispatcher requestDispatcher;
     try {
+      String name = request.getParameter("name");
+      String lastName = request.getParameter("lastName");
+      String email = request.getParameter("email");
+      String phone = request.getParameter("phone");
+      Student student = new Student();
+      student.setName(name);
+      student.setLastName(lastName);
+      student.setEmail(email);
+      student.setPhone(phone);
+
       StudentService studentService = new StudentService();
       student = studentService.add(student);
       request.setAttribute("student", student);
@@ -87,7 +88,9 @@ public class StudentController extends HttpServlet {
   @Override
   protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     //Modify student
-    Long id = Long.valueOf(request.getParameter("id"));
+    RequestDispatcher requestDispatcher;
+    try {
+      Long id = Long.valueOf(request.getParameter("id"));
     String name = request.getParameter("name");
     String lastName = request.getParameter("lastName");
     String email = request.getParameter("email");
@@ -98,8 +101,7 @@ public class StudentController extends HttpServlet {
     student.setLastName(lastName);
     student.setEmail(email);
     student.setPhone(phone);
-    RequestDispatcher requestDispatcher;
-    try {
+
       StudentService studentService = new StudentService();
       student = studentService.update(student);
       request.setAttribute("student", student);
@@ -108,7 +110,7 @@ public class StudentController extends HttpServlet {
       requestDispatcher = request.getRequestDispatcher("viewStudent.jsp");
     } catch (Exception ex) {
       request.setAttribute("status", "error");
-      request.setAttribute("message", "Cannot find student by id " + id + ": " + ex);
+      request.setAttribute("message", "Cannot find student: " + ex);
       requestDispatcher = request.getRequestDispatcher("error.jsp");
     }
     response.setContentType("text/html");
@@ -118,9 +120,9 @@ public class StudentController extends HttpServlet {
   @Override
   protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     //Delete student
-    Long id = Long.valueOf(request.getParameter("id"));
     RequestDispatcher requestDispatcher;
     try {
+      Long id = Long.valueOf(request.getParameter("id"));
       StudentService studentService = new StudentService();
       studentService.delete(id);
       request.setAttribute("status", "ok");
@@ -129,7 +131,7 @@ public class StudentController extends HttpServlet {
       requestDispatcher = request.getRequestDispatcher("viewStudent.jsp");
     } catch (Exception ex) {
       request.setAttribute("status", "error");
-      request.setAttribute("message", "Cannot delete student with id " + id + ": " + ex);
+      request.setAttribute("message", "Cannot delete student: " + ex);
       requestDispatcher = request.getRequestDispatcher("error.jsp");
     }
     response.setContentType("text/html");

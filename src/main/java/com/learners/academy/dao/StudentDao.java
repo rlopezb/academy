@@ -34,9 +34,9 @@ public class StudentDao {
   public List<Student> findAll() {
     Session session = Database.openSession(false);
     TypedQuery typedQuery = session.createQuery("from Student");
-    List<Student> clazzes = typedQuery.getResultList();
+    List<Student> students = typedQuery.getResultList();
     Database.closeSession(session);
-    return clazzes;
+    return students;
   }
 
   public Student findById(Long id) {

@@ -44,7 +44,7 @@ public class SubjectController extends HttpServlet {
                 request.setAttribute("subjects", subjects);
                 request.setAttribute("status", "ok");
                 request.setAttribute("message", "List of " + subjects.size() + " subjects retrieved");
-                requestDispatcher = request.getRequestDispatcher("viewSubjectList.jsp");
+                requestDispatcher = request.getRequestDispatcher("viewSubjects.jsp");
             } catch (Exception ex) {
                 request.setAttribute("status", "error");
                 request.setAttribute("error", "Cannot list all subjects: " + ex);
@@ -89,6 +89,7 @@ public class SubjectController extends HttpServlet {
         Subject subject = new Subject();
         subject.setId(id);
         subject.setName(name);
+        subject.setLevel(level);
         RequestDispatcher requestDispatcher;
         try {
             SubjectService subjectService = new SubjectService();

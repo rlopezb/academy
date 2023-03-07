@@ -1,7 +1,6 @@
 package com.learners.academy.entity;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Subject {
@@ -10,25 +9,23 @@ public class Subject {
   private Long id;
   private String name;
   private String level;
-  @OneToMany(mappedBy = "subject")
-  private List<Clazz> clazzes;
+  @ManyToOne
+  @JoinColumn(name = "clazzId", nullable = true)
+  private Clazz clazz;
+  @ManyToOne
+  @JoinColumn(name = "teacherId", nullable = true)
+  private Teacher teacher;
 
   public Subject() {
 
   }
 
-  public Subject(String name, String level, List<Clazz> clazzes) {
-    this.name = name;
-    this.level = level;
-    this.clazzes = clazzes;
+  public Long getId() {
+    return id;
   }
 
   public void setId(Long id) {
     this.id = id;
-  }
-
-  public Long getId() {
-    return id;
   }
 
   public String getName() {
@@ -47,21 +44,30 @@ public class Subject {
     this.level = level;
   }
 
-  public List<Clazz> getClazzes() {
-    return clazzes;
+  public Clazz getClazz() {
+    return clazz;
   }
 
-  public void setClazzes(List<Clazz> clazzes) {
-    this.clazzes = clazzes;
+  public void setClazz(Clazz clazz) {
+    this.clazz = clazz;
+  }
+
+  public Teacher getTeacher() {
+    return teacher;
+  }
+
+  public void setTeacher(Teacher teacher) {
+    this.teacher = teacher;
   }
 
   @Override
   public String toString() {
     return "Subject{" +
-            "id=" + id +
-            ", name='" + name + '\'' +
-            ", level='" + level + '\'' +
-            ", clazzes=" + clazzes +
-            '}';
+        "id=" + id +
+        ", name='" + name + '\'' +
+        ", level='" + level + '\'' +
+        ", clazz=" + clazz +
+        ", teacher=" + teacher +
+        '}';
   }
 }

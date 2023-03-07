@@ -14,5 +14,6 @@
         <mapping class="com.learners.academy.entity.Clazz"/>
         <mapping class="com.learners.academy.entity.Teacher"/>
         <mapping class="com.learners.academy.entity.Student"/>
+        <mapping class="com.learners.academy.entity.User"/>
     </session-factory>
 </hibernate-configuration>

@@ -22,8 +22,7 @@
         <strong>Lastname: </strong><span><%=student.getLastName()%></span><br/>
         <strong>eMail: </strong><span><%=student.getEmail()%></span><br/>
         <strong>Phone: </strong><span><%=student.getPhone()%></span><br/>
-        <strong>Class: </strong><span><%=student.getClazz() != null ? student.getClazz().getNumber() : "(not assigned)"%></span>
-
+        <strong>Class: </strong><span><%=student.getClazz() != null ? student.getClazz().getLevel() + student.getClazz().getLine()  : "(not assigned)"%></span>
     </li>
     <%
         }

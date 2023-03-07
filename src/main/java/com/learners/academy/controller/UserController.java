@@ -1,7 +1,7 @@
 package com.learners.academy.controller;
 
-import com.learners.academy.entity.Teacher;
-import com.learners.academy.service.TeacherService;
+import com.learners.academy.entity.User;
+import com.learners.academy.service.UserService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,42 +12,42 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "TeacherController", value = "/TeacherController")
-public class TeacherController extends HttpServlet {
+@WebServlet(name = "UserController", value = "/UserController")
+public class UserController extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    //Get teacher(s)
+    //Get user(s)
     RequestDispatcher requestDispatcher;
     if (request.getParameter("id") != null) {
       try {
         Long id = Long.valueOf(request.getParameter("id"));
-        TeacherService teacherService = new TeacherService();
-        Teacher teacher = teacherService.findById(id);
-        request.setAttribute("teacher", teacher);
-        if (teacher == null) {
+        UserService userService = new UserService();
+        User user = userService.findById(id);
+        request.setAttribute("user", user);
+        if (user == null) {
           request.setAttribute("status", "info");
-          request.setAttribute("message", "Teacher with id " + id + " not found");
+          request.setAttribute("message", "User with id " + id + " not found");
         } else {
           request.setAttribute("status", "ok");
-          request.setAttribute("message", "Teacher with id " + id + " found");
+          request.setAttribute("message", "User with id " + id + " found");
         }
-        requestDispatcher = request.getRequestDispatcher("viewTeacher.jsp");
+        requestDispatcher = request.getRequestDispatcher("viewUser.jsp");
       } catch (Exception ex) {
         request.setAttribute("status", "error");
-        request.setAttribute("message", "Cannot find teacher: " + ex);
+        request.setAttribute("message", "Cannot find user: " + ex);
         requestDispatcher = request.getRequestDispatcher("error.jsp");
       }
     } else {
       try {
-        TeacherService teacherService = new TeacherService();
-        List<Teacher> teachers = teacherService.findAll();
-        request.setAttribute("teachers", teachers);
+        UserService userService = new UserService();
+        List<User> users = userService.findAll();
+        request.setAttribute("users", users);
         request.setAttribute("status", "ok");
-        request.setAttribute("message", "List of " + teachers.size() + " teachers retrieved");
-        requestDispatcher = request.getRequestDispatcher("viewTeachers.jsp");
+        request.setAttribute("message", "List of " + users.size() + " users retrieved");
+        requestDispatcher = request.getRequestDispatcher("viewUsers.jsp");
       } catch (Exception ex) {
         request.setAttribute("status", "error");
-        request.setAttribute("error", "Cannot list all teachers: " + ex);
+        request.setAttribute("error", "Cannot list all users: " + ex);
         requestDispatcher = request.getRequestDispatcher("error.jsp");
       }
     }
@@ -57,28 +57,32 @@ public class TeacherController extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    //Add new teacher
+    //Add new user
     RequestDispatcher requestDispatcher;
     try {
       String name = request.getParameter("name");
       String lastName = request.getParameter("lastName");
       String email = request.getParameter("email");
       String phone = request.getParameter("phone");
-      Teacher teacher = new Teacher();
-      teacher.setName(name);
-      teacher.setLastName(lastName);
-      teacher.setEmail(email);
-      teacher.setPhone(phone);
+      String login = request.getParameter("login");
+      String password = request.getParameter("password");
+      User user = new User();
+      user.setName(name);
+      user.setLastName(lastName);
+      user.setEmail(email);
+      user.setPhone(phone);
+      user.setLogin(login);
+      user.setPassword(password);
 
-      TeacherService teacherService = new TeacherService();
-      teacher = teacherService.add(teacher);
-      request.setAttribute("teacher", teacher);
+      UserService userService = new UserService();
+      user = userService.add(user);
+      request.setAttribute("user", user);
       request.setAttribute("status", "ok");
-      request.setAttribute("message", "New teacher added with id " + teacher.getId());
-      requestDispatcher = request.getRequestDispatcher("viewTeacher.jsp");
+      request.setAttribute("message", "New user added with id " + user.getId());
+      requestDispatcher = request.getRequestDispatcher("viewUser.jsp");
     } catch (Exception ex) {
       request.setAttribute("status", "error");
-      request.setAttribute("message", "Cannot add teacher: " + ex);
+      request.setAttribute("message", "Cannot add user: " + ex);
       requestDispatcher = request.getRequestDispatcher("error.jsp");
     }
     response.setContentType("text/html");
@@ -87,7 +91,7 @@ public class TeacherController extends HttpServlet {
 
   @Override
   protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    //Modify teacher
+    //Modify user
     RequestDispatcher requestDispatcher;
     try {
       Long id = Long.valueOf(request.getParameter("id"));
@@ -95,22 +99,26 @@ public class TeacherController extends HttpServlet {
       String lastName = request.getParameter("lastName");
       String email = request.getParameter("email");
       String phone = request.getParameter("phone");
-      Teacher teacher = new Teacher();
-      teacher.setId(id);
-      teacher.setName(name);
-      teacher.setLastName(lastName);
-      teacher.setEmail(email);
-      teacher.setPhone(phone);
+      String login = request.getParameter("login");
+      String password = request.getParameter("password");
+      User user = new User();
+      user.setId(id);
+      user.setName(name);
+      user.setLastName(lastName);
+      user.setEmail(email);
+      user.setPhone(phone);
+      user.setLogin(login);
+      user.setPassword(password);
 
-      TeacherService teacherService = new TeacherService();
-      teacher = teacherService.update(teacher);
-      request.setAttribute("teacher", teacher);
+      UserService userService = new UserService();
+      user = userService.update(user);
+      request.setAttribute("user", user);
       request.setAttribute("status", "ok");
-      request.setAttribute("message", "Teacher with id " + teacher.getId() + " updated");
-      requestDispatcher = request.getRequestDispatcher("viewTeacher.jsp");
+      request.setAttribute("message", "User with id " + user.getId() + " updated");
+      requestDispatcher = request.getRequestDispatcher("viewUser.jsp");
     } catch (Exception ex) {
       request.setAttribute("status", "error");
-      request.setAttribute("message", "Cannot find teacher: " + ex);
+      request.setAttribute("message", "Cannot find user: " + ex);
       requestDispatcher = request.getRequestDispatcher("error.jsp");
     }
     response.setContentType("text/html");
@@ -119,19 +127,19 @@ public class TeacherController extends HttpServlet {
 
   @Override
   protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    //Delete teacher
+    //Delete user
     RequestDispatcher requestDispatcher;
     try {
       Long id = Long.valueOf(request.getParameter("id"));
-      TeacherService teacherService = new TeacherService();
-      teacherService.delete(id);
+      UserService userService = new UserService();
+      userService.delete(id);
       request.setAttribute("status", "ok");
-      request.setAttribute("message", "Teacher with id " + id + " deleted");
-      request.setAttribute("teacher", null);
-      requestDispatcher = request.getRequestDispatcher("viewTeacher.jsp");
+      request.setAttribute("message", "User with id " + id + " deleted");
+      request.setAttribute("user", null);
+      requestDispatcher = request.getRequestDispatcher("viewUser.jsp");
     } catch (Exception ex) {
       request.setAttribute("status", "error");
-      request.setAttribute("message", "Cannot delete teacher: " + ex);
+      request.setAttribute("message", "Cannot delete user: " + ex);
       requestDispatcher = request.getRequestDispatcher("error.jsp");
     }
     response.setContentType("text/html");
