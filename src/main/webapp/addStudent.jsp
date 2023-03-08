@@ -5,9 +5,11 @@
   <title>Learner's Academy</title>
 </head>
 <body>
+<% if(request.getAttribute("message")!=null){%>
 <div class="toast ${status}">
   <%= request.getAttribute("message")%>
 </div>
+<%}%>
 <h2>Add student</h2>
 Please, insert student data:<br/>
 <form action="StudentController" method="post">

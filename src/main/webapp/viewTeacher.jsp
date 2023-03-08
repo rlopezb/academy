@@ -7,9 +7,11 @@
     <title>View teacher</title>
 </head>
 <body>
+<% if(request.getAttribute("message")!=null){%>
 <div class="toast ${status}">
     <%= request.getAttribute("message")%>
 </div>
+<%}%>
 <h2>View teacher</h2>
 <%
     Teacher teacher = (Teacher) request.getAttribute("teacher");
@@ -25,6 +27,15 @@
     <input type="hidden" name="id" value="<%=teacher.getId()%>" />
     <input type="hidden" name="action" value="delete"/>
     <input type="submit" value="Delete" />
+</form>
+<form action="modifyTeacher.jsp" method="post">
+    <input type="hidden" name="action" value="modify"/>
+    <input type="hidden" name="id" value="<%=teacher.getId()%>" />
+    <input type="hidden" name="name" value="<%=teacher.getName()%>" />
+    <input type="hidden" name="lastName" value="<%=teacher.getLastName()%>" />
+    <input type="hidden" name="email" value="<%=teacher.getEmail()%>" />
+    <input type="hidden" name="phone" value="<%=teacher.getPhone()%>" />
+    <input type="submit" value="Modify" />
 </form>
 <%
     } else {

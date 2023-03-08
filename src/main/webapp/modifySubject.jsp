@@ -10,13 +10,15 @@
     <%= request.getAttribute("message")%>
 </div>
 <%}%>
-<h2>Add subject</h2>
+<h2>Modify subject <%=request.getParameter("id")%>
+</h2>
 Please, insert subject data:<br/>
 <form action="SubjectController" method="post">
-    <label>Name: <input type="text" name="name"/></label><br/>
-    <label>Level: <input type="text" name="level"/></label><br/>
-    <input type="hidden" name="action" value="add"/>
-    <input type="submit" value="Add"/>
+    <input type="hidden" name="id" value="<%=request.getParameter("id")%>"/>
+    <label>Name: <input type="text" name="name" value="<%=request.getParameter("name")%>"/></label><br/>
+    <label>Level: <input type="text" name="level" value="<%=request.getParameter("level")%>"/></label><br/>
+    <input type="hidden" name="action" value="modify"/>
+    <input type="submit" value="Save"/>
     <input type="reset" value="Reset"/>
 </form>
 </body>

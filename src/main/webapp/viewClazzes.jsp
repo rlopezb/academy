@@ -7,9 +7,11 @@
     <title>Clazz list</title>
 </head>
 <body>
+<% if(request.getAttribute("message")!=null){%>
 <div class="toast ${status}">
     <%= request.getAttribute("message")%>
 </div>
+<%}%>
 <h2>Clazz list</h2>
 <ul>
     <%

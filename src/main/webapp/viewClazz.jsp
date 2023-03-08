@@ -6,9 +6,11 @@
     <title>View clazz</title>
 </head>
 <body>
+<% if(request.getAttribute("message")!=null){%>
 <div class="toast ${status}">
     <%= request.getAttribute("message")%>
 </div>
+<%}%>
 <h2>View clazz</h2>
 <%
     Clazz clazz = (Clazz) request.getAttribute("clazz");
@@ -23,6 +25,14 @@
     <input type="hidden" name="action" value="delete"/>
     <input type="submit" value="Delete" />
 </form>
+<form action="modifyClazz.jsp" method="post">
+    <input type="hidden" name="action" value="modify"/>
+    <input type="hidden" name="id" value="<%=clazz.getId()%>" />
+    <input type="hidden" name="line" value="<%=clazz.getLine()%>" />
+    <input type="hidden" name="level" value="<%=clazz.getLevel()%>" />
+    <input type="submit" value="Modify" />
+</form>
+
 <%
 } else {
 %>

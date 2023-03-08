@@ -10,13 +10,14 @@
     <%= request.getAttribute("message")%>
 </div>
 <%}%>
-<h2>Add class</h2>
+<h2>Modify class <%=request.getParameter("id")%></h2>
 Please, insert class data:<br/>
 <form action="ClazzController" method="post">
-    <label>Level: <input type="text" name="level"/></label><br/>
-    <label>Line: <input type="text" name="line"/></label><br/>
-    <input type="hidden" name="action" value="add"/>
-    <input type="submit" value="Add"/>
+    <input type="hidden" name="id" value="<%=request.getParameter("id")%>"/>
+    <label>Level: <input type="text" name="level" value="<%=request.getParameter("level")%>"/></label><br/>
+    <label>Line: <input type="text" name="line" value="<%=request.getParameter("line")%>"/></label><br/>
+    <input type="hidden" name="action" value="modify"/>
+    <input type="submit" value="Save"/>
     <input type="reset" value="Reset"/>
 </form>
 </body>
