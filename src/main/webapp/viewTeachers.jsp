@@ -4,7 +4,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="css/academy.css">
-    <title>Teacher list</title>
+    <title>Learner's Academy</title>
 </head>
 <body>
 <% if(request.getAttribute("message")!=null){%>

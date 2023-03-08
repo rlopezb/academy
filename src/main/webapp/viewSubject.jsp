@@ -3,7 +3,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="css/academy.css">
-    <title>View subject</title>
+    <title>Learner's Academy</title>
 </head>
 <body>
 <% if(request.getAttribute("message")!=null){%>
@@ -42,6 +42,5 @@
     }
 %>
 Go to <a href="home.jsp">Home</a> page<br/>
-
 </body>
 </html>

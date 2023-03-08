@@ -23,5 +23,6 @@ Please, insert student data:<br/>
     <input type="submit" value="Save"/>
     <input type="reset" value="Reset"/>
 </form>
+Go to <a href="home.jsp">Home</a> page<br/>
 </body>
 </html>

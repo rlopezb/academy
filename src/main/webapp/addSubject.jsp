@@ -19,5 +19,6 @@ Please, insert subject data:<br/>
     <input type="submit" value="Add"/>
     <input type="reset" value="Reset"/>
 </form>
+Go to <a href="home.jsp">Home</a> page<br/>
 </body>
 </html>

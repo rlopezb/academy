@@ -15,6 +15,6 @@
     Welcome to Learner's Academy:<br/>
     If you are already logged in, go to <a href="home.jsp">Home</a> page, please<br/>
     If not, go to <a href="login.jsp">Login</a> page<br/>
-
+</div>
 </body>
 </html>
