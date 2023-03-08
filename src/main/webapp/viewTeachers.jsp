@@ -1,6 +1,6 @@
 <%@ page import="com.learners.academy.entity.Teacher" %>
 <%@ page import="java.util.List" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <link rel="stylesheet" href="css/academy.css">

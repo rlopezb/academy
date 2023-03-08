@@ -1,6 +1,8 @@
 package com.learners.academy.controller;
 
+import com.learners.academy.entity.Clazz;
 import com.learners.academy.entity.Student;
+import com.learners.academy.service.ClazzService;
 import com.learners.academy.service.StudentService;
 
 import javax.servlet.RequestDispatcher;
@@ -69,6 +71,12 @@ public class StudentController extends HttpServlet {
       case "modify":
         modify(request, response);
         break;
+      case "assignClazz":
+        assignClazz(request, response);
+        break;
+      case "modifyClazz":
+        modifyClazz(request, response);
+        break;
     }
   }
 
@@ -122,6 +130,63 @@ public class StudentController extends HttpServlet {
       request.setAttribute("status", "ok");
       request.setAttribute("message", "Student with id " + student.getId() + " updated");
       requestDispatcher = request.getRequestDispatcher("viewStudent.jsp");
+    } catch (Exception ex) {
+      request.setAttribute("status", "error");
+      request.setAttribute("message", "Cannot find student: " + ex);
+      requestDispatcher = request.getRequestDispatcher("error.jsp");
+    }
+    response.setContentType("text/html");
+    requestDispatcher.include(request, response);
+  }
+
+  private void modifyClazz(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    //Modify student
+    RequestDispatcher requestDispatcher;
+    try {
+      Long studentId = Long.valueOf(request.getParameter("studentId"));
+      StudentService studentService = new StudentService();
+      Student student = studentService.findById(studentId);
+
+      if (request.getParameter("clazzId").equals("")) {
+        student.setClazz(null);
+        studentService.updateClazz(student);
+        request.setAttribute("student", student);
+        request.setAttribute("status", "ok");
+        request.setAttribute("message", "Student with id " + student.getId() + " not assigned to any class");
+      } else {
+        Long clazzId = Long.valueOf(request.getParameter("clazzId"));
+        ClazzService clazzService = new ClazzService();
+        Clazz clazz = clazzService.findById(clazzId);
+        student.setClazz(clazz);
+        studentService.updateClazz(student);
+        request.setAttribute("student", student);
+        request.setAttribute("status", "ok");
+        request.setAttribute("message", "Student with id " + student.getId() + " assigned to class with id " + clazz.getId());
+      }
+      requestDispatcher = request.getRequestDispatcher("viewStudent.jsp");
+    } catch (Exception ex) {
+      request.setAttribute("status", "error");
+      request.setAttribute("message", "Cannot find student: " + ex);
+      requestDispatcher = request.getRequestDispatcher("error.jsp");
+    }
+    response.setContentType("text/html");
+    requestDispatcher.include(request, response);
+  }
+
+  private void assignClazz(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    //Modify student
+    RequestDispatcher requestDispatcher;
+    try {
+      Long id = Long.valueOf(request.getParameter("id"));
+      StudentService studentService = new StudentService();
+      Student student = studentService.findById(id);
+      ClazzService clazzService = new ClazzService();
+      List<Clazz> clazzes = clazzService.findAll();
+      request.setAttribute("clazzes", clazzes);
+      request.setAttribute("student", student);
+      request.setAttribute("status", "ok");
+      request.setAttribute("message", "List of " + clazzes.size() + " possible classes for student with id " + student.getId());
+      requestDispatcher = request.getRequestDispatcher("assignClazzToStudent.jsp");
     } catch (Exception ex) {
       request.setAttribute("status", "error");
       request.setAttribute("message", "Cannot find student: " + ex);

@@ -18,9 +18,12 @@ public class SubjectDao {
 
   public Subject update(Subject subject) {
     Session session = Database.openSession(true);
-    session.update(subject);
+    Subject dbSubject = session.find(Subject.class, subject.getId());
+    dbSubject.setName(subject.getName());
+    dbSubject.setLevel(subject.getLevel());
+    session.update(dbSubject);
     Database.closeSession(session);
-    return subject;
+    return dbSubject;
   }
 
   public Boolean delete(Long id) {

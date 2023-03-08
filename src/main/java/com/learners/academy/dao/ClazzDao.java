@@ -18,9 +18,12 @@ public class ClazzDao {
 
   public Clazz update(Clazz clazz) {
     Session session = Database.openSession(true);
-    session.update(clazz);
+    Clazz dbClazz = session.find(Clazz.class, clazz.getId());
+    dbClazz.setLine(clazz.getLine());
+    dbClazz.setLevel(clazz.getLevel());
+    session.update(dbClazz);
     Database.closeSession(session);
-    return clazz;
+    return dbClazz;
   }
 
   public Boolean delete(Long id) {

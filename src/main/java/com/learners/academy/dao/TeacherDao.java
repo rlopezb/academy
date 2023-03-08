@@ -18,9 +18,14 @@ public class TeacherDao {
 
   public Teacher update(Teacher teacher) {
     Session session = Database.openSession(true);
-    session.update(teacher);
+    Teacher dbTeacher = session.find(Teacher.class, teacher.getId());
+    dbTeacher.setName(teacher.getName());
+    dbTeacher.setLastName(teacher.getLastName());
+    dbTeacher.setEmail(teacher.getEmail());
+    dbTeacher.setPhone(teacher.getPhone());
+    session.update(dbTeacher);
     Database.closeSession(session);
-    return teacher;
+    return dbTeacher;
   }
 
   public Boolean delete(Long id) {

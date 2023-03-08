@@ -6,7 +6,7 @@
     <title>Learner's Academy</title>
 </head>
 <body>
-<% if(request.getAttribute("message")!=null){%>
+<% if (request.getAttribute("message") != null) {%>
 <div class="toast ${status}">
     <%= request.getAttribute("message")%>
 </div>
@@ -22,24 +22,28 @@
 <strong>Lastname: </strong><span><%=student.getLastName()%></span><br/>
 <strong>eMail: </strong><span><%=student.getEmail()%></span><br/>
 <strong>Phone: </strong><span><%=student.getPhone()%></span><br/>
-<strong>Class: </strong><span><%=student.getClazz() != null ? student.getClazz().getLevel() + student.getClazz().getLine()  : "(not assigned)"%></span>
+<strong>Class: </strong><span><%=student.getClazz() != null ? student.getClazz().getLevel() + " " + student.getClazz().getLine() : "(not assigned)"%></span>
 <form action="StudentController" method="post">
-    <input type="hidden" name="id" value="<%=student.getId()%>" />
     <input type="hidden" name="action" value="delete"/>
-    <input type="submit" value="Delete" />
+    <input type="hidden" name="id" value="<%=student.getId()%>"/>
+    <input type="submit" value="Delete"/>
 </form>
 <form action="modifyStudent.jsp" method="post">
     <input type="hidden" name="action" value="modify"/>
-    <input type="hidden" name="id" value="<%=student.getId()%>" />
-    <input type="hidden" name="name" value="<%=student.getName()%>" />
-    <input type="hidden" name="lastName" value="<%=student.getLastName()%>" />
-    <input type="hidden" name="email" value="<%=student.getEmail()%>" />
-    <input type="hidden" name="phone" value="<%=student.getPhone()%>" />
-    <input type="submit" value="Modify" />
+    <input type="hidden" name="id" value="<%=student.getId()%>"/>
+    <input type="hidden" name="name" value="<%=student.getName()%>"/>
+    <input type="hidden" name="lastName" value="<%=student.getLastName()%>"/>
+    <input type="hidden" name="email" value="<%=student.getEmail()%>"/>
+    <input type="hidden" name="phone" value="<%=student.getPhone()%>"/>
+    <input type="submit" value="Modify"/>
 </form>
-
+<form action="StudentController" method="post">
+    <input type="hidden" name="action" value="assignClazz"/>
+    <input type="hidden" name="id" value="<%=student.getId()%>"/>
+    <input type="submit" value="Assign to class"/>
+</form>
 <%
-    } else {
+} else {
 %>
 <h3>Student with id <%=request.getParameter("id")%> not found
 </h3>
