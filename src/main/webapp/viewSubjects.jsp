@@ -21,10 +21,12 @@
     <li>
         <h3>Subject with id <%=subject.getId()%></h3>
         <strong>Name: </strong><span><%=subject.getName()%></span><br/>
-        <strong>Level: </strong><span><%=subject.getLevel()%></span>
+        <strong>Level: </strong><span><%=subject.getLevel()%></span><br/>
+        <strong>Class: </strong><span><%=subject.getClazz() != null ? subject.getClazz().getLevel() + " " + subject.getClazz().getLine() : "(not assigned)"%></span><br/>
+        <strong>Teacher: </strong><span><%=subject.getTeacher() != null ? subject.getTeacher().getName() + " " + subject.getTeacher().getLastName() : "(not assigned)"%></span>
         <form action="SubjectController" method="get">
             <input type="hidden" name="id" value="<%=subject.getId()%>" />
-            <input type="submit" value="View" />
+            <input type="submit" value="Manage" />
         </form>
     </li>
     <%

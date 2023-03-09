@@ -16,6 +16,13 @@ public class SubjectService {
     return subjectDao.update(subject);
   }
 
+  public Subject updateClazz(Subject subject) {
+    return subjectDao.updateClazz(subject);
+  }
+  public Subject updateTeacher(Subject subject) {
+    return subjectDao.updateTeacher(subject);
+  }
+
   public Boolean delete(Long id) {
     return subjectDao.delete(id);
 

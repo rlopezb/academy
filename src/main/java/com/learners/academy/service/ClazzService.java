@@ -30,4 +30,8 @@ public class ClazzService {
     return clazzDao.findById(id);
 
   }
+  public Clazz eagerFindById(Long id) {
+    return clazzDao.eagerFindById(id);
+
+  }
 }

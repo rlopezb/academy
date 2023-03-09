@@ -14,10 +14,10 @@
 <div>
     Welcome to Learner's Academy:<br/>
     <ul>
-        <li><a href="StudentController?action=view">View list of students</a></li>
-        <li><a href="TeacherController?action=view">View list of teachers</a></li>
-        <li><a href="SubjectController?action=view">View list of subjects</a></li>
-        <li><a href="ClazzController?action=view">View list of classes</a></li>
+        <li><a href="StudentController">View list of students</a></li>
+        <li><a href="TeacherController">View list of teachers</a></li>
+        <li><a href="SubjectController">View list of subjects</a></li>
+        <li><a href="ClazzController">View list of classes</a></li>
     </ul>
 </div>
 </body>

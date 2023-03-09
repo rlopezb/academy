@@ -26,7 +26,7 @@
         <strong>Phone: </strong><span><%=teacher.getPhone()%></span>
         <form action="TeacherController" method="get">
             <input type="hidden" name="id" value="<%=teacher.getId()%>" />
-            <input type="submit" value="View" />
+            <input type="submit" value="Manage" />
         </form>
     </li>
     <%

@@ -1,6 +1,9 @@
 package com.learners.academy.dao;
 
 import com.learners.academy.entity.Clazz;
+import com.learners.academy.entity.Student;
+import com.learners.academy.entity.Subject;
+import com.learners.academy.entity.Teacher;
 import com.learners.academy.resource.Database;
 import org.hibernate.Session;
 
@@ -45,6 +48,23 @@ public class ClazzDao {
   public Clazz findById(Long id) {
     Session session = Database.openSession(false);
     Clazz clazz = session.find(Clazz.class, id);
+    Database.closeSession(session);
+    return clazz;
+  }
+  public Clazz eagerFindById(Long id) {
+    Session session = Database.openSession(false);
+    Clazz clazz = session.find(Clazz.class, id);
+    TypedQuery studentsTypedQuery = session.createQuery("from Student where clazz=:clazz");
+    studentsTypedQuery.setParameter("clazz", clazz);
+    List<Student> students = studentsTypedQuery.getResultList();
+    clazz.setStudents(students);
+    TypedQuery subjectsTypedQuery = session.createQuery("from Subject where clazz=:clazz");
+    subjectsTypedQuery.setParameter("clazz", clazz);
+    List<Subject> subjects = subjectsTypedQuery.getResultList();
+    for(Subject subject:subjects){
+
+    }
+    clazz.setSubjects(subjects);
     Database.closeSession(session);
     return clazz;
   }

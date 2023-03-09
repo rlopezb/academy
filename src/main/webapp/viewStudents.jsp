@@ -28,7 +28,7 @@
         <strong>Class: </strong><span><%=student.getClazz() != null ? student.getClazz().getLevel() + " " + student.getClazz().getLine() : "(not assigned)"%></span><br/>
         <form action="StudentController" method="get">
             <input type="hidden" name="id" value="<%=student.getId()%>"/>
-            <input type="submit" value="View"/>
+            <input type="submit" value="Manage"/>
         </form>
     </li>
     <%

@@ -32,7 +32,11 @@
     <input type="hidden" name="level" value="<%=clazz.getLevel()%>" />
     <input type="submit" value="Modify" />
 </form>
-
+<form action="ClazzController" method="get">
+    <input type="hidden" name="action" value="report"/>
+    <input type="hidden" name="id" value="<%=clazz.getId()%>"/>
+    <input type="submit" value="Report"/>
+</form>
 <%
 } else {
 %>

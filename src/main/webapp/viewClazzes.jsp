@@ -23,9 +23,8 @@
         <strong>Level: </strong><span><%=clazz.getLevel()%></span><br/>
         <strong>Line: </strong><span><%=clazz.getLine()%></span>
         <form action="ClazzController" method="get">
-            <input type="hidden" name="action" value="detail"/>
             <input type="hidden" name="id" value="<%=clazz.getId()%>" />
-            <input type="submit" value="View" />
+            <input type="submit" value="Manage" />
         </form>
     </li>
     <%

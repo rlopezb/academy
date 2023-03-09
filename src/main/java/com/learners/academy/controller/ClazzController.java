@@ -14,15 +14,25 @@ import java.util.List;
 
 @WebServlet(name = "ClazzController", value = "/ClazzController")
 public class ClazzController extends HttpServlet {
+
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     //Get clazz(s)
     RequestDispatcher requestDispatcher;
     if (request.getParameter("id") != null) {
       try {
+        String action = request.getParameter("action");
+        Clazz clazz;
         Long id = Long.valueOf(request.getParameter("id"));
-        ClazzService clazzService = new ClazzService();
-        Clazz clazz = clazzService.findById(id);
+        if (action != null && action.equals("report")) {
+          requestDispatcher = request.getRequestDispatcher("reportClazz.jsp");
+          ClazzService clazzService = new ClazzService();
+          clazz = clazzService.eagerFindById(id);
+        } else {
+          requestDispatcher = request.getRequestDispatcher("viewClazz.jsp");
+          ClazzService clazzService = new ClazzService();
+          clazz = clazzService.findById(id);
+        }
         request.setAttribute("clazz", clazz);
         if (clazz == null) {
           request.setAttribute("status", "info");
@@ -31,7 +41,6 @@ public class ClazzController extends HttpServlet {
           request.setAttribute("status", "ok");
           request.setAttribute("message", "Clazz with id " + id + " found");
         }
-        requestDispatcher = request.getRequestDispatcher("viewClazz.jsp");
       } catch (Exception ex) {
         request.setAttribute("status", "error");
         request.setAttribute("message", "Cannot find clazz: " + ex);

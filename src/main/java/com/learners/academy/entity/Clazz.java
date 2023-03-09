@@ -63,10 +63,9 @@ public class Clazz {
   @Override
   public String toString() {
     return "Clazz{" +
-        "id=" + id +
-        ", group=" + line +
-        ", students=" + students +
-        ", subjects=" + subjects +
-        '}';
+            "id=" + id +
+            ", line='" + line + '\'' +
+            ", level='" + level + '\'' +
+            '}';
   }
 }

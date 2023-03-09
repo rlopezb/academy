@@ -1,6 +1,7 @@
 package com.learners.academy.dao;
 
 import com.learners.academy.entity.Subject;
+import com.learners.academy.entity.Subject;
 import com.learners.academy.resource.Database;
 import org.hibernate.Session;
 
@@ -25,7 +26,22 @@ public class SubjectDao {
     Database.closeSession(session);
     return dbSubject;
   }
-
+  public Subject updateClazz(Subject subject){
+    Session session = Database.openSession(true);
+    Subject dbSubject = session.find(Subject.class, subject.getId());
+    dbSubject.setClazz(subject.getClazz());
+    session.update(dbSubject);
+    Database.closeSession(session);
+    return dbSubject;
+  } 
+  public Subject updateTeacher(Subject subject){
+    Session session = Database.openSession(true);
+    Subject dbSubject = session.find(Subject.class, subject.getId());
+    dbSubject.setTeacher(subject.getTeacher());
+    session.update(dbSubject);
+    Database.closeSession(session);
+    return dbSubject;
+  }
   public Boolean delete(Long id) {
     Session session = Database.openSession(true);
     Subject subject = session.find(Subject.class, id);
